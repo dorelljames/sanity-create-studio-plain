@@ -1,0 +1,24 @@
+service: sanity-create-studio-plain
+# app and org for use with dashboard.serverless.com
+app: sanity-create-studio-plain
+org: dorelljames
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: ap-southeast-1
+  environment:
+    APP_TOKEN: ${param:APP_TOKEN}
+    APP_TOKEN_LIVE: ${param:APP_TOKEN_LIVE}
+
+functions:
+  createNewProject:
+    handler: handler.createNewProject
+    events:
+      - http:
+          path: /
+          method: POST
+
+plugins:
+  - serverless-offline
